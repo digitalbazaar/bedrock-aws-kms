@@ -1,0 +1,14 @@
+*.lcov
+*.log
+*.sw[nop]
+*~
+.nyc_output
+.project
+.settings
+.vscode
+TAGS
+binding.gyp
+build
+coverage
+node_modules
+reports
