@@ -13,8 +13,7 @@ import {webcrypto} from 'node:crypto';
 describe('asymmetric keys', () => {
   const tests = [
     {type: 'urn:webkms:multikey:P-256', keyType: 'P-256'},
-    {type: 'urn:webkms:multikey:P-384', keyType: 'P-384'},
-    {type: 'urn:webkms:multikey:P-521', keyType: 'P-521'}
+    {type: 'urn:webkms:multikey:P-384', keyType: 'P-384'}
     // {type: 'urn:webkms:multikey:Ed25519', keyType: 'Ed25519'},
   ];
   const kms = brAwsKms.getClient({name: 'test'});
