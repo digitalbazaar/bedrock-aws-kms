@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2026 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2026 Digital Bazaar, Inc.
  */
 import * as brAwsKms from '@bedrock/aws-kms';
 import {webcrypto} from 'node:crypto';
