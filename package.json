@@ -28,15 +28,14 @@
   "homepage": "https://github.com/digitalbazaar/bedrock-aws-kms",
   "dependencies": {
     "@aws-sdk/client-kms": "^3.775.0",
-    "@digitalbazaar/ecdsa-multikey": "^1.8.0",
-    "sha256-hmac-key-2019-context": "^1.0.3"
+    "@digitalbazaar/ecdsa-multikey": "^1.8.0"
   },
   "peerDependencies": {
     "@bedrock/core": "^6.3.0",
     "@bedrock/validation": "^7.1.1"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=24"
   },
   "devDependencies": {
     "@digitalbazaar/eslint-config": "^8.0.1",
