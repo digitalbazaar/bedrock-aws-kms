@@ -256,7 +256,7 @@ describe('symmetric keys', () => {
             // skip test for access check since localstack does not support it
             return;
           }
-          console.log({amazonResourceName: arn, policy, result});
+
           should.not.exist(result);
           should.exist(err);
           err.name.should.equal('AccessDeniedException');
