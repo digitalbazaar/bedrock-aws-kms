@@ -37,7 +37,7 @@ describe('asymmetric keys', () => {
             keyType
           });
 
-          const data = Buffer.alloc(32);
+          const data = new Uint8Array(32);
           webcrypto.getRandomValues(data);
 
           let err;
