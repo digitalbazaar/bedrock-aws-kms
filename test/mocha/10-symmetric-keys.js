@@ -27,7 +27,7 @@ describe('symmetric keys', () => {
         ({amazonResourceName} = await kms.generateKey({keyType}));
       });
       it('successfully signs data', async () => {
-        const data = Buffer.alloc(32);
+        const data = new Uint8Array(32);
         webcrypto.getRandomValues(data);
 
         let err;
@@ -61,7 +61,7 @@ describe('symmetric keys', () => {
       it('fails to sign data - input too large', async () => {
         const {amazonResourceName} = await kms.generateKey({keyType});
 
-        const data = Buffer.alloc(4096);
+        const data = new Uint8Array(4096);
         webcrypto.getRandomValues(data);
 
         let err;
@@ -82,7 +82,7 @@ describe('symmetric keys', () => {
       it('fails to verify data - signature size mismatch', async () => {
         const {amazonResourceName} = await kms.generateKey({keyType});
 
-        const data = Buffer.alloc(32);
+        const data = new Uint8Array(32);
         webcrypto.getRandomValues(data);
 
         let err;
@@ -98,7 +98,7 @@ describe('symmetric keys', () => {
         should.exist(result.algorithm);
         should.exist(result.signature);
 
-        const signature = Buffer.alloc(1000);
+        const signature = new Uint8Array(1000);
         webcrypto.getRandomValues(data);
 
         err = undefined;
@@ -141,7 +141,7 @@ describe('symmetric keys', () => {
       });
 
       it('successfully encrypts and decrypts data', async () => {
-        const data = Buffer.alloc(32);
+        const data = new Uint8Array(32);
         webcrypto.getRandomValues(data);
 
         let err;
@@ -175,7 +175,7 @@ describe('symmetric keys', () => {
         Buffer.compare(Buffer.from(result.plaintext), data).should.equal(0);
       });
       it('fails to encrypt data - input too large', async () => {
-        const data = Buffer.alloc(4096);
+        const data = new Uint8Array(4096);
         webcrypto.getRandomValues(data);
 
         let err;
@@ -197,7 +197,7 @@ describe('symmetric keys', () => {
         async () => {
           const {amazonResourceName: arn} = await kms.generateKey({keyType});
 
-          const secretKey = Buffer.alloc(32);
+          const secretKey = new Uint8Array(32);
           webcrypto.getRandomValues(secretKey);
 
           let err;
