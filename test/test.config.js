@@ -10,5 +10,14 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 config.mocha.tests.push(path.join(__dirname, 'mocha'));
 
+config['aws-kms'].clients.test = {
+  credentials: {
+    accessKeyId: 'test',
+    secretAccessKey: 'test'
+  },
+  endpoint: 'http://localhost:4566',
+  region: 'us-east-1'
+};
+
 // allow self-signed certs in test framework
 config['https-agent'].rejectUnauthorized = false;
