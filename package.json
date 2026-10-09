@@ -6,7 +6,8 @@
   "license": "SEE LICENSE IN LICENSE.md",
   "main": "./lib/index.js",
   "files": [
-    "lib/*.js"
+    "lib/*.js",
+    "vendor/alpine-x64/**"
   ],
   "scripts": {
     "generate-readme": "jsdoc2md -t readme-template.hbs lib/*.js > README.md",
@@ -28,11 +29,11 @@
   "homepage": "https://github.com/digitalbazaar/bedrock-aws-kms",
   "dependencies": {
     "@aws-sdk/client-kms": "^3.775.0",
-    "@digitalbazaar/ecdsa-multikey": "^1.8.0"
+    "@digitalbazaar/ecdsa-multikey": "^1.8.0",
+    "@digitalbazaar/http-client": "^4.4.0"
   },
   "peerDependencies": {
-    "@bedrock/core": "^6.3.0",
-    "@bedrock/validation": "^7.1.1"
+    "@bedrock/core": "^6.3.0"
   },
   "engines": {
     "node": ">=24"
