@@ -1,0 +1,19 @@
+name: kmstool vendor reproducibility
+
+on:
+  push:
+    paths:
+      - tools/kmstool/**
+      - scripts/build-kmstool-vendor.sh
+      - vendor/**
+
+jobs:
+  vendor-reproducibility:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rebuild vendor artifacts from pinned sources
+        run: ./scripts/build-kmstool-vendor.sh
+      - name: Verify rebuild reproduces committed artifacts
+        run: git diff --exit-code vendor/alpine-x64
