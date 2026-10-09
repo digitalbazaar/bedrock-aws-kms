@@ -5,7 +5,7 @@
 # TOOLCHAIN PIN — do not casually bump the builder image.
 #   The AWS CRT pins below are the dependency profile AWS uses for
 #   aws-nitro-enclaves-sdk-c v0.4.5. They build most predictably on a
-#   period-compatible Alpine toolchain. The builder is pinned to alpine:3.20
+#   period-compatible Alpine toolchain. The builder uses alpine:3.20
 #   while the runtime remains node:24-alpine.
 #
 # LINKING
@@ -45,7 +45,7 @@ ENV AWS_NE_SDK_C_VERSION="v0.4.5" \
   JSON_C_COMMIT="2f2ddc1f2dbca56c874e8f9c31b5b963202d80e7" \
   AWS_NE_NSM_API_VERSION="v0.4.0" \
   AWS_NE_NSM_API_COMMIT="4b851f3006c6fa98f23dcffb2cba03b39de9b8af" \
-  RUST_TOOLCHAIN_VERSION="1.92" \
+  RUST_TOOLCHAIN_VERSION="1.92.0" \
   RUSTUP_VERSION="1.28.2" \
   RUSTUP_INIT_SHA256="e6599a1c7be58a2d8eaca66a80e0dc006d87bbcf780a58b7343d6e14c1605cb2" \
   RUSTFLAGS="-C target-feature=-crt-static"
@@ -224,10 +224,13 @@ RUN curl --fail --location --silent --show-error --output rustup-init \
 
 ENV PATH="/root/.cargo/bin:${PATH}"
 
+COPY tools/kmstool/Cargo.lock /tmp/nsm-Cargo.lock
+
 RUN git clone --depth 1 --branch "${AWS_NE_NSM_API_VERSION}" https://github.com/aws/aws-nitro-enclaves-nsm-api.git \
   && test "$(git -C aws-nitro-enclaves-nsm-api rev-parse HEAD)" = "${AWS_NE_NSM_API_COMMIT}" \
   && cd aws-nitro-enclaves-nsm-api \
-  && cargo build --release --jobs "$(nproc)" -p nsm-lib \
+  && cp /tmp/nsm-Cargo.lock Cargo.lock \
+  && cargo build --locked --release --jobs "$(nproc)" -p nsm-lib \
   && cp target/release/libnsm.so /usr/lib/libnsm.so \
   && cp target/release/nsm.h /usr/include/nsm.h
 
