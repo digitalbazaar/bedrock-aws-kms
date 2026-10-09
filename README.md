@@ -41,6 +41,11 @@ Rebuild the native runtime from this repository with:
 ./scripts/build-kmstool-vendor.sh
 ```
 
+The build uses `alpine:3.20` and installs packages with `apk`. If Alpine or its
+packages change, the built files may change too. We also copy `libgcc_s.so.1`
+from the installed `libgcc` package and check its checksum. If the checksums
+change, check what changed in the build before updating `SHA256SUMS`.
+
 ## Create a Tagged Release
 ```sh
 # update the changelog as with `pubnpm`
