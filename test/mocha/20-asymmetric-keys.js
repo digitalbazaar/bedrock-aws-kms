@@ -16,7 +16,10 @@ describe('asymmetric keys', () => {
     {type: 'urn:webkms:multikey:P-384', keyType: 'P-384'}
     // {type: 'urn:webkms:multikey:Ed25519', keyType: 'Ed25519'},
   ];
-  const kms = brAwsKms.getClient({name: 'test'});
+  let kms;
+  before(() => {
+    kms = brAwsKms.getClient({name: 'test'});
+  });
 
   for(const {keyType, type} of tests) {
     describe(type, () => {
@@ -37,8 +40,7 @@ describe('asymmetric keys', () => {
             keyType
           });
 
-          const data = new Uint8Array(32);
-          webcrypto.getRandomValues(data);
+          const data = webcrypto.getRandomValues(new Uint8Array(32));
 
           let err;
           let result;
@@ -70,7 +72,7 @@ describe('asymmetric keys', () => {
             verifier = {
               async verify({data, signature}) {
 
-                const derSignature = helpers.p1363ToDer(Buffer.from(signature));
+                const derSignature = helpers.p1363ToDer(signature);
                 const {verified: hsmVerified} = await kms.verify({
                   amazonResourceName, keyType, data, signature: derSignature
                 });
