@@ -1,6 +1,6 @@
 {
   "name": "@bedrock/aws-kms",
-  "version": "1.0.0",
+  "version": "1.0.1-0",
   "type": "module",
   "description": "Bedrock API for communicating with AWS KMS",
   "license": "SEE LICENSE IN LICENSE.md",
